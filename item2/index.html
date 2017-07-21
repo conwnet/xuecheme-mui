@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<style>
+			#list .mui-media-object {
+				line-height: 100px;
+				max-width: 100px;
+				height: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="enroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<p style="margin: 0;">
+							<img style="height: 80px; width: 100%; vertical-align: middle;" :src="banner">
+						</p>
+					</div>
+				</div>
+
+				<ul id="list" class="mui-table-view">
+					<li class="mui-table-view-cell mui-media" style="padding: 8px 13px;" data-guid="coach.id" v-for="coach in coaches">
+						<a href="javascript:;">
+							<img class="mui-media-object mui-pull-left" :src="coach.headimg">
+							<div class="mui-media-body">
+								<p style="font-size: 16px; color: #000;">{{ coach.name }}</p>
+								<p style="color: #F0AD4E;">
+									<span style="font-size: 16px;" class="mui-icon mui-icon-star-filled" v-for="i in parseInt(coach.star)"></span><span style="font-size: 16px;" class="mui-icon mui-icon mui-icon-starhalf" v-if="coach.star % 1"></span> {{ coach.star }}分
+									<span style="color: #111;">
+								</p>
+								<p style="font-size: 12px; white-space: normal;">{{ coach.tip }}</p>
+								<div style="display: flex;  align-items: center;">
+									<div style="flex: 1;">
+										<p style="font-size: 12px; white-space: normal;">
+											今日已预约<span style="color: #00ccff;">{{ coach.day_count }}</span>人
+								</p>
+								<p><span style="color: #DD524D" v-for="label in coach.labels">{{ label }} </span></p>
+							</div>
+							<p style="font-size: 14px; text-align: center;"><span style="color:#f40; font-size: 20px;">￥{{ coach.price }}</span> / 小时</p>
+			</div>
+
+		</div>
+		</a>
+		</li>
+		</ul>
+		</div>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#enroll',
+				data: {
+					banner: 'http://placehold.it/350x80',
+					coaches: [{
+						headimg: 'http://placehold.it/100x100',
+						name: '李教练',
+						star: 4.5,
+						tip: '快来学车吧～来让我看看你是不是老司机',
+						day_count: 12,
+						labels: ['车接车送', '服务好'],
+						price: 80
+					}, {
+						headimg: 'http://placehold.it/100x100',
+						name: '李教练',
+						star: 4.5,
+						tip: '快来学车吧～来让我看看你是不是老司机',
+						day_count: 12,
+						labels: ['车接车送', '服务好'],
+						price: 80
+					}, {
+						headimg: 'http://placehold.it/100x100',
+						name: '李教练',
+						star: 4.5,
+						tip: '快来学车吧～来让我看看你是不是老司机',
+						day_count: 12,
+						labels: ['车接车送', '服务好'],
+						price: 80
+					}, ]
+				},
+				methods: {}
+			});
+
+			mui.init({
+				pullRefresh: {
+					container: '#enroll',
+					down: {
+						style: 'circle',
+						callback: function() {
+							setTimeout(function() {
+								mui.toast('刷新成功！');
+								mui('#enroll').pullRefresh().endPulldownToRefresh(true);
+							}, 500)
+						}
+					},
+					up: {
+						auto: false,
+						contentrefresh: '正在加载...',
+						callback: function() {
+							setTimeout(function() {
+								mui.toast('加载完成！');
+								mui('#enroll').pullRefresh().endPullupToRefresh()
+							}, 500)
+
+						}
+					}
+				}
+			});
+
+			mui.plusReady(function() {
+				mui('.mui-table-view').on('tap', '.mui-table-view-cell', function() {
+					var coach_id = this.getAttribute('data-guid');
+					mui.openWindow({
+						url: 'coach.html',
+						id: 'item2/coach.html',
+						extras: {
+							coach_id: coach_id
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

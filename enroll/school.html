@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<style>
+			.mui-slider img {
+				height: 150px;
+				width: 100%;
+			}
+			
+			.self-content {
+				background: #fff;
+				padding: 10px;
+				border-top: 1px solid #fff;
+				border-bottom: 1px solid #fff;
+			}
+			
+			.self-content .self-title {
+				font-size: 16px;
+				color: #E07D2E;
+			}
+			
+			.self-content .self-list {
+				padding: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">驾校详情</h1>
+		</header>
+		<div id="school" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="slider" class="mui-slider" v-if="sliders.length">
+					<div class="mui-slider-group mui-slider-loop">
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a :href="sliders[sliders.length - 1].url"><img :src="sliders[sliders.length - 1].src"></a>
+						</div>
+						<div class="mui-slider-item" v-for="slider in sliders">
+							<a :href="slider.url"><img :src="slider.src"></a>
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a :href="sliders[0].url"><img :src="sliders[0].src"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="self-content">
+					<div style=" display: flex;">
+						<img style="width: 80px; height: 80px;" src="http://placehold.it/80x80" />
+						<div style="margin-left: 10px;">
+							<p style="font-size: 20px; color: #111;">{{ school.name }}</p>
+							<p style="font-size: 16px;"><span style="color: #00ccff;">{{ school.count }}</span> 名学员</p>
+						</div>
+					</div>
+
+					<div style="display: flex; margin-top: 10px; text-align: center;">
+						<div style="flex: 1;">
+							<p><span style="color: #00ccff;">{{ school.over_avg }}</span> 天</p>
+							<p>平均拿证时间</p>
+						</div>
+						<div style="flex: 1;">
+							<p><span style="color: #00ccff;">{{ school.item2_avg }}</span> %</p>
+							<p>科目二通过率</p>
+						</div>
+						<div style="flex: 1;">
+							<p><span style="color: #00ccff;">{{ school.item3_avg }}</span> %</p>
+							<p>科目三通过率</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="self-content" style="margin-top: 10px;">
+					<h2 class="self-title">套餐信息</h2>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell" style="display: flex; align-items: center;" v-for="pack in packs">
+							<img  style="height: 60px; width: 60px; border-radius: 50%;" :src="pack.headimg" />
+							<div style="margin-left: 10px; flex: 1;">
+								<h3 style="font-size: 14px; color: #007aff;">{{ pack.name }}</h3>
+								<p style="font-size: 12px;">{{ pack.desc }}</p>
+							</div>
+							<span style="color: #f40; font-size: 20px;">￥{{ pack.price }}</span>
+							<span style="color: #888;" class="mui-icon mui-icon-forward"></span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="self-content" style="margin-top: 10px;">
+					<h2 class="self-title">学员评论</h2>
+					<div class="self-list" style="border-bottom: 1px solid #ccc;" v-for="comment in comments">
+						<div style="padding-bottom: 5px;">
+							<img style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle;" :src="comment.headimg">
+							<span style="color: #222">123</span>
+							<span style="color: #F0AD4E; font-size: 12px; margin-left: 5px;">
+								<span style="font-size: 14px;" class="mui-icon mui-icon-star-filled" v-for="i in parseInt(comment.star)"></span><span style="font-size: 14px;" class="mui-icon mui-icon mui-icon-starhalf" v-if="parseFloat(comment.star) % 1"></span> {{ comment.star }}分
+							</span>
+						</div>
+						<p style="text-indent: 2em;">
+							{{ comment.content }}
+						</p>
+					</div>
+
+					<p style="text-align: center;">暂无更多...</p>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#school',
+				data: {
+					sliders: [{
+						src: 'http://placehold.it/400x150',
+						url: '#'
+					}, {
+						src: 'http://placehold.it/400x150',
+						url: '#'
+					}],
+					school: {
+						name: '秣马驾校',
+						count: 102,
+						over_avg: 150,
+						item2_avg: 99,
+						item3_avg: 90
+					},
+					packs: [{
+						headimg: 'http://placehold.it/100x100',
+						name: '套餐一标题',
+						desc: '套餐一简介套餐一简介套餐一简介套餐一简介套餐一简介套餐一简介',
+						price: '2888',
+						count: 18
+					}, {
+						headimg: 'http://placehold.it/100x100',
+						name: '套餐一标题',
+						desc: '套餐一简介套餐一简介套餐一简介套餐一简介套餐一简介套餐一简介',
+						price: '2888',
+						count: 18
+					}],
+					comments: [{
+						headimg: 'http://placehold.it/100x100',
+						name: '别急还没硬',
+						star: 4.5,
+						content: '评论内容，评论内容评论内容评论内容评论内容评论内容评论内容评论内容。'
+					}, ]
+				}
+			});
+			mui.init({
+				pullRefresh: {
+					container: '#school',
+					up: {
+						auto: false,
+						contentrefresh: '正在加载...',
+						callback: function() {
+							setTimeout(function() {
+								mui.toast('加载完成！');
+								mui('#school').pullRefresh().endPullupToRefresh()
+							}, 500)
+						}
+					}
+				}
+			})
+			
+			mui.plusReady(function () {
+				var self = plus.webview.currentWebview();
+				mui.toast(self.school_id);
+			})
+			
+		</script>
+	</body>
+
+</html>

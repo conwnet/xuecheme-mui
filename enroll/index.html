@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<style>
+			#list .mui-media-object {
+				line-height: 100px;
+				max-width: 100px;
+				height: 100px;
+			}
+			
+			.mui-slider img {
+				height: 100px;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="enroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="slider" class="mui-slider" v-if="sliders.length">
+					<div class="mui-slider-group mui-slider-loop">
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a :href="sliders[sliders.length - 1].url"><img :src="sliders[sliders.length - 1].src"></a>
+						</div>
+						<div class="mui-slider-item" v-for="slider in sliders">
+							<a :href="slider.url"><img :src="slider.src"></a>
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a :href="sliders[0].url"><img :src="sliders[0].src"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<p style="margin: 0;">
+							<img style="height: 80px; vertical-align: middle;" :src="count.logo"> 累计为学员节省
+							<span style="font-size: 25px; color: #007AFF;">{{ count.hours }}
+								<sup style="color: #ff33cc;">+</sup>
+							</span>小时
+						</p>
+					</div>
+				</div>
+
+				<ul id="list" class="mui-table-view">
+					<li class="mui-table-view-cell mui-media" :data-guid="school.id" v-for="school in schools">
+						<img class="mui-media-object mui-pull-left" :src="school.headimg">
+						<div class="mui-media-body">
+							<p style="font-size: 16px; color: #000;">{{ school.name }}</p>
+							<p style="color: #F0AD4E;">
+								<span style="font-size: 16px;" class="mui-icon mui-icon-star-filled" v-for="i in parseInt(school.star)"></span><span style="font-size: 16px;" class="mui-icon mui-icon mui-icon-starhalf" v-if="school.star % 1"></span> {{ school.star }}分
+								<span style="color: #111;">(<span style="color: #00ccff;">{{ school.count }}</span> 人报名)</span>
+							</p>
+							<div style="display: flex; align-items: center;">
+								<div style="flex: 1;">
+									<p>报名点距离我 <span style="color: #DD524D;">{{ 11.5 }}</span> km</p>
+									<p>练车场距离我 <span style="color: #DD524D">{{ 1.1 }}</span> km</p>
+									<p><span style="color: #DD524D" v-for="label in school.labels">{{ label }} </span></p>
+								</div>
+								<p style="font-size: 16px; text-align: center;">￥<span style="color:#f40; font-size: 20px;">2888</span>起</p>
+							</div>
+						</div>
+
+					</li>
+				</ul>
+			</div>
+			<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/mui.pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/mui.pullToRefresh.material.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript">
+				var vm = new Vue({
+					el: '#enroll',
+					data: {
+						sliders: [{
+							src: 'http://placehold.it/400x100',
+							url: '#'
+						}, {
+							src: 'http://placehold.it/400x100',
+							url: '#'
+						}],
+						count: {
+							logo: 'http://placehold.it/80x80',
+							hours: '30000'
+						},
+						schools: [{
+							id: 1,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						}, {
+							id: 2,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						}, {
+							id: 3,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						}, {
+							id: 4,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						}, {
+							id: 5,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						}, {
+							id: 6,
+							headimg: 'http://placehold.it/100x100',
+							name: '秣马驾校（沈航报名点）',
+							star: 4.5,
+							count: 128,
+							labels: ['车接车送', '服务好']
+						} ]
+					},
+					methods: {}
+				});
+
+				mui.init({
+				
+					pullRefresh: {
+						container: '#enroll',
+						down: {
+							style: 'circle',
+							callback: function() {
+								setTimeout(function() {
+									mui.toast('刷新成功！');
+									mui('#enroll').pullRefresh().endPulldownToRefresh(true);
+								}, 500)
+							}
+						},
+						up: {
+							contentrefresh: '正在加载...',
+							callback: function() {
+								setTimeout(function() {
+									mui.toast('加载完成！');
+									mui('#enroll').pullRefresh().endPullupToRefresh()
+								}, 500)
+							}
+						}
+					}
+				});
+				
+				mui.plusReady(function () {
+					mui('.mui-table-view').on('tap', '.mui-table-view-cell', function () {
+						var school_id = this.getAttribute('data-guid');
+						mui.openWindow({
+							url: 'school.html',
+							id: 'enroll/school.html',
+							extras: {
+								school_id: school_id
+							}
+						})
+					})
+				})
+				
+			</script>
+	</body>
+
+</html>

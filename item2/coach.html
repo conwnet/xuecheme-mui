@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<style>
+			.self-content {
+				background: #fff;
+				padding: 10px;
+				border-top: 1px solid #fff;
+				border-bottom: 1px solid #fff;
+			}
+			
+			.self-content .self-title {
+				font-size: 16px;
+				color: #E07D2E;
+			}
+			
+			.self-content .self-list {
+				padding: 5px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">教练详情</h1>
+			</header>
+
+			<div class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="self-content" style="display: flex;">
+						<img style="width: 80px; height: 80px; border-radius: 50%;" :src="coach.headimg">
+						<div style="flex: 1; margin-left: 10px;">
+							<div style="font-size: 16px; color: #222; line-height: 20px;">{{ coach.name }}</div>
+							<div style="color: #F0AD4E; margin-top: 5px;">
+								<span style="font-size: 16px;" class="mui-icon mui-icon-star-filled" v-for="i in parseInt(coach.star)"></span><span style="font-size: 16px;" class="mui-icon mui-icon mui-icon-starhalf" v-if="coach.star % 1"></span> {{ coach.star }}分
+								<span style="color: #111;">
+							<span style="color: #888; font-size: 14px;">已授 <span style="color: #0cf;">{{ coach.courses_count }}</span> 课时</span>
+							</div>
+							<div style="color: #333; margin-top: 5px; font-size: 14px;">
+								价格：￥<span style="font-size: 20px; color: #f40">{{ coach.price }}</span> / 小时
+							</div>
+						</div>
+					</div>
+
+					<ul class="mui-table-view self-content" style="margin-top: 10px;">
+						<h2 class="self-title">课程表
+						<span style="font-weight: normal; font-size: 14px; color: #888;">(今日剩余 <span style="color: #0cf;">{{ free_courses }}</span> 节课)</span>
+					</h2>
+						<li class="mui-table-view-cell" :data-guid="course.id" :class="course.status ? 'mui-disabled' : ''" v-for="course in courses">
+							<a :class="course.status ? '' : 'mui-navigate-right'" style="text-align: center;" :style="{color: course.status ? '#f00' :'#0f0'}">
+								<span class="mui-icon" :class="course.status ? 'mui-icon-closeempty' :'mui-icon-checkmarkempty'"></span>{{ formatTime(course.begin) }} - {{ formatTime(course.end) }}
+							</a>
+						</li>
+					</ul>
+
+					<div class="self-content" style="margin-top: 10px;">
+						<h2 class="self-title">学员评论</h2>
+						<div class="self-list" style="border-bottom: 1px solid #ccc;" v-for="comment in comments">
+							<div style="padding-bottom: 5px;">
+								<img style="width: 30px; height: 30px; border-radius: 50%; vertical-align: middle;" :src="comment.headimg">
+								<span style="color: #222">123</span>
+								<span style="color: #F0AD4E; font-size: 12px; margin-left: 5px;">
+								<span style="font-size: 14px;" class="mui-icon mui-icon-star-filled" v-for="i in parseInt(comment.star)"></span><span style="font-size: 14px;" class="mui-icon mui-icon mui-icon-starhalf" v-if="parseFloat(comment.star) % 1"></span> {{ comment.star }}分
+								</span>
+							</div>
+							<p style="text-indent: 2em;">
+								{{ comment.content }}
+							</p>
+						</div>
+
+						<p style="text-align: center;">暂无更多...</p>
+					</div>
+				</div>
+			</div>
+
+			<div id="sheet" class="mui-popover mui-popover-bottom mui-popover-action" style="z-index: 999;">
+				<!-- 可选择菜单 -->
+				<ul class="mui-table-view">
+					<div style="padding: 10px; color: #222; border-bottom: 1px solid #ccc;">
+						<p>您选择的是 <span style="color: #000">{{ coach.name }}</span> 的课程</p>
+						<p>练车时间为：<span style="color: #000">{{ formatTime(check.begin) }} - {{ formatTime(check.end) }}</span></p>
+					</div>
+					<li class="mui-table-view-cell" id="sheet_confirm">
+						<a href="#">就选它了</a>
+					</li>
+				</ul>
+				<!-- 取消菜单 -->
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="sheet_cancel">
+						<a href="#sheet1"><b>取消</b></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script src="../js/mui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					coach: {
+						headimg: 'http://placehold.it/100x100',
+						name: '李教练',
+						star: 3.5,
+						courses_count: 128,
+						price: 80
+					},
+					courses: [{
+						id: 1,
+						begin: 480,
+						end: 560,
+						status: 0
+					}, {
+						id: 2,
+						begin: 580,
+						end: 640,
+						status: 1
+					}, {
+						id: 3,
+						begin: 660,
+						end: 720,
+						status: 0
+					}, {
+						id: 2,
+						begin: 580,
+						end: 640,
+						status: 1
+					}, {
+						id: 3,
+						begin: 660,
+						end: 720,
+						status: 0
+					}, {
+						id: 2,
+						begin: 580,
+						end: 640,
+						status: 1
+					}, {
+						id: 3,
+						begin: 660,
+						end: 720,
+						status: 0
+					}, {
+						id: 4,
+						begin: 660,
+						end: 720,
+						status: 0
+					}],
+					check: {
+						id: 0,
+						begin: 0,
+						end: 0
+					},
+					comments: [{
+						headimg: 'http://placehold.it/100x100',
+						name: '别急还没硬',
+						star: 4.5,
+						content: '评论内容，评论内容评论内容评论内容评论内容评论内容评论内容评论内容。'
+					}, ]
+				},
+				computed: {
+					free_courses: function() {
+						var res = 0;
+						for(var i = 0; i < this.courses.length; i++)
+							if(this.courses[i].status == 0) res++;
+						return res;
+					}
+				},
+				methods: {
+					formatTime: function(mins) {
+						var min = '00' + parseInt(parseInt(mins) / 60);
+						var sec = '00' + parseInt(parseInt(mins) % 60);
+						return min.slice(-2) + ':' + sec.slice(-2);
+					}
+				}
+			})
+
+			mui('.mui-table-view').on('tap', '.mui-table-view-cell', function() {
+				var id = this.getAttribute('data-guid');
+				var course = {}
+				for(var i = 0; i < vm.courses.length; i++) {
+					if(vm.courses[i].id == id) {
+						course = vm.courses[i];
+						break;
+					}
+				}
+				vm.check = {
+					id: course.id,
+					begin: course.begin,
+					end: course.end
+				}
+				mui('#sheet').popover('toggle');
+			})
+
+			document.getElementById("sheet_confirm").addEventListener("tap", function() {
+				mui.toast("选课成功！");
+			})
+
+			document.getElementById("sheet_cancel").addEventListener("tap", function() {
+				mui.toast("取消了");
+			})
+
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				mui.toast(self.school_id);
+			})
+			mui('.mui-scroll-wrapper').scroll();
+			mui.init()
+		</script>
+	</body>
+
+</html>

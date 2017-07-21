@@ -1,0 +1,185 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "pages/home.html",
+      "js/mui.js",
+      "css/mui.css",
+      "test.html",
+      "js/webviewGroup.js",
+      "pages/enroll/enroll.html",
+      "enroll/enroll.html",
+      "enroll/index.html"
+    ],
+    "refer": [
+      "pages/home.html",
+      "test.html",
+      "pages/enroll/enroll.html",
+      "user/index.html",
+      "enroll/enroll.html",
+      "enroll/index.html",
+      "item2/index.html",
+      "item1/index.html",
+      "item3/index.html",
+      "item4/index.html",
+      "over/index.html"
+    ]
+  },
+  "pages/home.html": {
+    "resources": [
+      "js/mui.js",
+      "css/mui.css",
+      "js/mui.min.js",
+      "js/vue.min.js",
+      "fonts/mui.ttf",
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js"
+    ],
+    "refer": []
+  },
+  "test.html": {
+    "resources": [
+      "js/mui.js",
+      "css/mui.css"
+    ],
+    "refer": []
+  },
+  "pages/enroll/enroll.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "fonts/mui.ttf",
+      "js/vue.min.js",
+      "css/mui.css"
+    ],
+    "refer": []
+  },
+  "user/index.html": {
+    "resources": [
+      "css/mui.min.css",
+      "user/js/app.js",
+      "css/feedback.css",
+      "images/logo.png",
+      "js/feedback.js",
+      "js/mui.view.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "user/login.html",
+      "js/mui.js",
+      "css/mui.css",
+      "js/vue.min.js",
+      "user/list-to-detail.css"
+    ],
+    "refer": [
+      "user/login.html"
+    ]
+  },
+  "enroll/enroll.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/vue.min.js"
+    ],
+    "refer": []
+  },
+  "user/login.html": {
+    "resources": [
+      "user/js/mui.enterfocus.js",
+      "user/js/app.js",
+      "css/mui.css",
+      "js/mui.js",
+      "user/index.html",
+      "user/images/qq.png",
+      "user/images/weixin.png",
+      "user/images/sinaweibo.png",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "user/index.html",
+      "user/reg.html",
+      "user/forget_password.html"
+    ]
+  },
+  "user/reg.html": {
+    "resources": [
+      "user/css/style.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "user/js/app.js",
+      "js/axios.min.js",
+      "js/mui.js",
+      "js/es6-promise.min.js"
+    ],
+    "refer": [
+      "user/login.html"
+    ]
+  },
+  "enroll/index.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/vue.min.js",
+      "css/mui.css",
+      "fonts/mui.ttf",
+      "enroll/school.html"
+    ],
+    "refer": [
+      "enroll/school.html"
+    ]
+  },
+  "item2/index.html": {
+    "resources": [
+      "js/mui.js",
+      "css/mui.css",
+      "js/mui.pullToRefresh.js",
+      "js/mui.min.js",
+      "js/mui.pullToRefresh.material.js",
+      "fonts/mui.ttf",
+      "js/vue.min.js"
+    ],
+    "refer": [
+      "item2/coach.html"
+    ]
+  },
+  "item1/index.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "css/mui.css",
+      "js/mui.js"
+    ]
+  },
+  "item3/index.html": {
+    "resources": [
+      "js/mui.js",
+      "css/mui.css"
+    ]
+  },
+  "item4/index.html": {
+    "resources": [
+      "js/mui.js",
+      "css/mui.css"
+    ]
+  },
+  "enroll/school.html": {
+    "resources": [
+      "js/mui.js",
+      "fonts/mui.ttf",
+      "js/vue.min.js",
+      "css/mui.css"
+    ]
+  },
+  "item2/coach.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/vue.min.js",
+      "js/mui.js",
+      "css/mui.css"
+    ]
+  }
+}
